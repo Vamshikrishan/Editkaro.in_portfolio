@@ -5,15 +5,15 @@
  * categories: short, long, gaming, football, ecommerce, documentary, colorgrade, anime, ads
  */
 const VIDEOS = [
-  { id: 'v1', title: 'Explosive Reels — Fast Cuts', category: 'short', tags: ['reel','short','ads'], src:'videos/video1.mp4', thumbnail: 'thumbnails/t1.png' },
-  { id: 'v2', title: 'Product Ad — eCommerce Showcase', category: 'ecommerce', tags: ['ad','product'], src:'videos/video2.mp4', thumbnail: 'thumbnails/t2.png'},
-  { id: 'v3', title: 'Gaming Montage — Highlights', category: 'gaming', tags: ['gaming','montage'], src:'videos/video3.mp4', thumbnail: 'thumbnails/t3.png'},
-  { id: 'v4', title: 'Football Edit — Match Highlights', category: 'football', tags: ['football','sports'], src:'videos/video4.mp4',thumbnail: 'thumbnails/t4.png'},
-  { id: 'v5', title: 'Documentary — Short Story', category: 'documentary', tags: ['doc','story'], src:'videos/video5.mp4', thumbnail: 'thumbnails/t5.png'},
-  { id: 'v6', title: 'Color Grade Reel — Cinematic', category: 'colorgrade', tags: ['color','grading'], src:'videos/video6.mp4', thumbnail: 'thumbnails/t6.png'},
-  { id: 'v7', title: 'Anime Cut — Motion Edit', category: 'anime', tags: ['anime','motion'], src:'videos/video7.mp4', thumbnail: 'thumbnails/t7.png'},
+  { id: 'v1', title: 'Explosive Reels — Fast Cuts', category: 'short', tags: ['reel','short','ads'], src:'https://drive.google.com/file/d/1J7-y1pb5rrLQlphXVhK03wWtwH0aveBH/view?usp=sharing', isGDrive:true, thumbnail: 'thumbnails/t1.png' },
+  { id: 'v2', title: 'Product Ad — eCommerce Showcase', category: 'ecommerce', tags: ['ad','product'], src:'https://drive.google.com/file/d/1ulQpGEhvI-ATS5sBwQJ_erGoe_tkSGf7/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t2.png'},
+  { id: 'v3', title: 'Gaming Montage — Highlights', category: 'gaming', tags: ['gaming','montage'], src:'https://drive.google.com/file/d/1ZmtXXfOCE7o7jHJyoWLHuyN3BCtgxtUY/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t3.png'},
+  { id: 'v4', title: 'Football Edit — Match Highlights', category: 'football', tags: ['football','sports'], src:'https://drive.google.com/file/d/1ASvDKUmCYZbz8kf-TxthAEw0o4ZM9bBa/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t4.png'},
+  { id: 'v5', title: 'Documentary — Short Story', category: 'documentary', tags: ['doc','story'], src:'https://drive.google.com/file/d/1Mui0nTHMgDKrMCXuHxyANNO0dgPfN3ur/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t5.png'},
+  { id: 'v6', title: 'Color Grade Reel — Cinematic', category: 'colorgrade', tags: ['color','grading'], src:'https://drive.google.com/file/d/1sPihGq0DrBEYQNahvWgANjWjVRAfzoa-/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t6.png'},
+  { id: 'v7', title: 'Anime Cut — Motion Edit', category: 'anime', tags: ['anime','motion'], src:'https://drive.google.com/file/d/1DYZVcmwf9ItUkBMOndKINziOnGJlfXAm/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t7.png'},
   { id: 'v8', title: 'Long Form — Mini Documentary', category: 'long', tags: ['longform','doc'], videoId: '60ItHLz5WEA'},
-  { id: 'v9', title: 'Mid-form Ad — Emotional Story', category: 'ads', tags: ['ad','story'], src:'videos/video9.mp4', thumbnail: 'thumbnails/t9.png'},
+  { id: 'v9', title: 'Mid-form Ad — Emotional Story', category: 'ads', tags: ['ad','story'], src:'https://drive.google.com/file/d/1ilG7Ap7gfeQuQ-rw3-jNfy2w_2Pwed-e/view?usp=sharing', isGDrive:true,thumbnail: 'thumbnails/t9.png'},
 ];
 
 /* categories to show in filter bar (ordered) */
@@ -151,6 +151,14 @@ const playerWrap = document.getElementById('player-wrap');
 const videoTitleEl = document.getElementById('video-title');
 const videoDescEl = document.getElementById('video-desc');
 
+function getGoogleDriveEmbedUrl(url) {
+  // Extract file ID from Google Drive sharing URL
+  const fileIdMatch = url.match(/\/d\/([^/]+)/);
+  if (!fileIdMatch) return null;
+  const fileId = fileIdMatch[1];
+  return `https://drive.google.com/file/d/${fileId}/preview`;
+}
+
 function openLightbox(video){
   // clear previous
   playerWrap.innerHTML = '';
@@ -159,7 +167,22 @@ function openLightbox(video){
   videoDescEl.textContent = `Category: ${video.category} • Tags: ${video.tags.join(', ')}`;
 
   // if videoId looks like a youtube id string -> embed iframe
-  if(video.videoId && !video.src){
+  if(video.isGDrive) {
+    const embedUrl = getGoogleDriveEmbedUrl(video.src);
+    if (embedUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '480';
+      iframe.src = embedUrl;
+      iframe.frameBorder = '0';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      playerWrap.appendChild(iframe);
+    } else {
+      playerWrap.innerHTML = '<div style="padding:40px;color:#fff;">Invalid Google Drive URL</div>';
+    }
+  }
+  else if(video.videoId && !video.src){
     const iframe = document.createElement('iframe');
     iframe.width = '100%';
     iframe.height = '480';
