@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Editkaro.in</title>
+  <link rel="icon" href="logo.png"/>
+  <meta name="description" content="Editkaro.in portfolio — short-form, long-form, gaming videos, football edits, eCommerce ads, documentaries, color grading, anime & ads." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+  <div class="container-header-inner">
+    <!-- Top row for logo and buttons -->
+    <div class="top-row">
+      <div class="brand">
+        <img src="logo.png" alt="Editkaro.in logo" class="logo-img">
+      </div>
+      
+      <div class="filters" id="category-bar">
+        <!-- Buttons injected by JS -->
+      </div>
+    </div>
+
+    <!-- Search bar in second row -->
+    <div class="search-row">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search title or tag..." aria-label="Search videos by title or tag" />
+        <button id="clear-search" title="Clear search" aria-label="Clear search">✕</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+  <main class="container-main">
+    <div id="home-content">
+    <section class="hero">
+      <h1 class="hero-title"><span class="accent">Editkaro.in</span></h1>
+      <p class="hero-sub">Editkaro.in is a creative agency passionate about storytelling through videos.  
+      From cinematic ads to high-energy reels, we turn raw footage into polished visual masterpieces.  
+      Our team combines <strong>precision, creativity, and emotion</strong> to deliver work that resonates.</p>
+    </section>
+  </div>
+
+    <section class="grid-wrap" aria-live="polite">
+      <div id="grid" class="video-grid">
+        <!-- Video cards injected by JS -->
+      </div>
+    </section>
+
+    <div id="empty-state" class="empty" hidden>
+      <p>No videos match your search or filter. Try clearing filters.</p>
+      <button class="btn ghost" id="reset-filters">Reset</button>
+    </div>
+    <div id="home-content">
+      <!-- ACHIEVEMENTS -->
+  <section class="achievements" id="achievements">
+    <h2 class="section-title">🏆 Achievements & Recognition</h2>
+    <ul class="awards-list">
+      <li>✨ Collaborated with 25+ content creators and brands globally</li>
+      <li>🎥 Edited 500+ engaging short-form and commercial videos</li>
+      <li>📈 Helped clients increase engagement rates by up to 80%</li>
+      <li>🏅 Featured on "Best Portfolio Inspiration 2025" shortlist</li>
+    </ul>
+  </section>
+    <!-- SKILLS -->
+  <section class="skills" id="skills">
+    <h2 class="section-title">🧠 Skills & Tools</h2>
+    <div class="skills-grid">
+      <div class="skill-card">Adobe Premiere Pro</div>
+      <div class="skill-card">After Effects</div>
+      <div class="skill-card">DaVinci Resolve</div>
+      <div class="skill-card">Photoshop</div>
+      <div class="skill-card">CapCut Pro</div>
+      <div class="skill-card">Canva</div>
+      <div class="skill-card">Color Grading</div>
+      <div class="skill-card">Sound Design</div>
+    </div>
+  </section>
+
+    <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2 class="section-title">📞 Contact Us</h2>
+    <p class="contact-links">Let's create something amazing together.</p>
+    <div class="contact-links">
+      <a href="mailto:editkaro.in@gmail.com">✉️ editkaro.in@gmail.com</a>
+      <a href="https://www.linkedin.com/" target="_blank">💼 LinkedIn</a>
+      <a href="https://www.instagram.com/" target="_blank">📸 Instagram</a>
+      <a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a>
+    </div>
+  </section>
+  </div>
+  </main>
+
+  <!-- lightbox modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-inner" role="document">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Close video">✕</button>
+      <div class="lightbox-content">
+        <div id="video-title" class="lb-title"></div>
+        <div class="video-frame">
+          <!-- iframe or video element injected here -->
+          <div id="player-wrap"></div>
+        </div>
+        <div id="video-desc" class="lb-desc"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Editkaro.in Designed by P Vamshi Krishna</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
